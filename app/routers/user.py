@@ -50,3 +50,9 @@ async def Update_User(payload:User ,id_card:str):
                   values=value
                     )
     return payload
+
+@router.delete('/{id_card}')
+async def Delete_User(id_card:str):
+    query = {'id_card': id_card}
+    db.delete_one(collection='user',query=query)
+    return {"detail": f"success deleted {id_card}"}
