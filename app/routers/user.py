@@ -40,4 +40,13 @@ async def Create_User(payload:User):
         payload.pop('_id')
         return payload
     
-    
+@router.put('/{id_card}')
+async def Update_User(payload:User ,id_card:str):
+    payload = payload.dict()
+    query = {'id_card': id_card}
+    value = {'$set': payload}
+    db.update_one(collection='user',
+                  query=query,
+                  values=value
+                    )
+    return payload
